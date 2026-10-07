@@ -1,30 +1,15 @@
-# Stride — Spider Learning Lab
+# Peep! — Robot Rescue
 
-An interactive eight-legged spider learning coordinated movement. Shaded body segments, connected tapered legs, eight eyes, pedipalps, ground shadows and joint-activation indicators replace the original humanoid overlay.
+A pastel cartoon game about Pip, a little robot with a big heart. Carry fluffy friends home across three progressively bumpier trails. Practice uses reward-based learning to adapt a controller to the selected trail. Real pickup adds passenger mass; reaching camp earns stars and unlocks another mission. Progress is saved locally, sound is optional and skills can be exported/imported.
 
-## Run
+Run `npm test` and `npm start`, then open http://localhost:8080. Node 24 and Python 3 are needed locally. No runtime npm dependencies. GitHub Actions runs physics and Playwright game tests, uploads screenshots and deploys Pages.
 
-```sh
-npm test
-npm start
-```
+Live game: https://sjefvanleeuwen.github.io/reinforcement-learning/
 
-Requires Node 24 and Python 3. Open http://localhost:8080. Modules and Web Workers require HTTP. There are no runtime npm dependencies; optional Google Fonts fall back to system fonts.
+## Mechanics and learning
 
-## Physics and training
+Four articulated legs and a horizontal body use ten physical nodes, gravity, torque-like motors, link constraints and foot contact. Smooth raised rubble changes the contact height. At x=.65, pickup increases body mass. Reach the mission goal within six simulated seconds without collapsing to rescue the passenger. Stars depend on arrival time (three under three seconds, two under five, otherwise one). Repeating a mission only improves its stored best star count.
 
-Eighteen physical nodes form a horizontal two-node body and eight two-link articulated legs. The simplified planar simulation includes gravity, link constraints, bounded motor forces and foot friction. The renderer separates the legs laterally and adds biological visual detail. Lateral balance and full 3D collisions are not simulated; this is an educational model, not validated arachnid biomechanics.
+Cross-entropy method tests populations of 12-parameter rhythmic feedback controllers. Rewards combine speed tracking, forward progress, body stability, pickup and rescue bonuses, effort costs and collapse penalties. A disclosed fixed vertical support gain of .8 helps beginner movement. The cartoon projects a planar simulation: lateral stability and real biomechanics are outside scope. No neural network, remote training or prerecorded gait is used. A measured 50-generation starter checkpoint can complete the first mission; harder courses need adaptation.
 
-A 12-parameter rhythmic feedback controller sets eight leg-joint targets and body pitch. Alternating groups of four legs share phase coordination. Cross-entropy method (CEM) samples a population, evaluates six-second physical rollouts, ranks accumulated rewards, fits an elite distribution and retains the champion. This is reward-based evolutionary policy optimization, not PPO or a neural network. No prerecorded locomotion is used.
-
-Reward combines target-speed tracking, capped forward velocity, level body posture, an effort penalty and a collapse penalty. Vertical support at the body is adjustable. The displayed percentage is a support gain, not a calibrated percentage of body weight; it supplies no external forward propulsion. Assisted results do not establish unassisted locomotion or generalization.
-
-Load the trained example to replay an actual measured 50-generation checkpoint (population 40, seed 42, target 1.4 m/s, support gain .8). Reproduce it with `node generate-example.js`. Changing settings resets the search. Export/import preserves a policy, its settings and learning curve for evaluation, not the optimizer's sampling/RNG state. Starting learning after import begins a fresh experiment. Spider checkpoints use format version 2 and environment `spider-v1`; obsolete humanoid policies are rejected.
-
-## GitHub Actions and Pages
-
-The workflow runs physics/policy tests, installs Playwright for browser checks, uploads desktop/mobile screenshots, then deploys the static site from main. Pages source must be GitHub Actions.
-
-Live site: https://sjefvanleeuwen.github.io/reinforcement-learning/
-
-Browser checks cover checkpoint playback, training, pause, export/import, reset, mobile overflow and page errors. Physics checks cover deterministic rollouts, finite state, link lengths, eight contacts, reward improvement, forward displacement, support differences and checkpoint validation.
+`node generate-example.js` reproduces the checkpoint. `npm test` checks deterministic physics, four legs, actual mass change at pickup, first-mission completion, harder-course differences, reward improvement and skill validation. Browser checks cover gameplay, pause, scoring, unlocks, practice, export/import, persistent progress and mobile layout. Imports evaluate a controller on the selected mission; they do not restore the optimizer distribution/RNG. Format v3 rejects obsolete spider/humanoid skills.

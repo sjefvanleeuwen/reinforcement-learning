@@ -1,4 +1,4 @@
-name: Verify and deploy Stride
+name: Verify and deploy Peep
 on:
   push:
     branches: [main]
