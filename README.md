@@ -1,15 +1,16 @@
-# Little Worlds — Evolution Garden
+# Life, in Deep Time — Cell to Creature
 
-A small, cheerful evolution sandbox. Set the plant supply, climate, predator pressure and mutation rate. Start the garden and watch cartoon creatures search for food, grow tired, raise young and pass inherited traits to the next generation.
+An educational evolutionary model that starts with a population of simple prokaryote-like cells near an ancient hydrothermal seep. Adjust mineral nutrients, sunlight, temperature, and ultraviolet radiation; then follow cell division, inherited variation, lineage branching, and differential survival over compressed deep time.
 
-Run `npm test` and `npm start`, then open http://localhost:8080. Requires Node 24 and Python 3. There are no runtime npm dependencies. GitHub Actions tests the ecology and browser, saves mobile/desktop screenshots and publishes GitHub Pages.
+Run `npm test` and `npm start`, then open http://localhost:8080. The static site has no runtime npm dependencies. GitHub Actions runs ecology and browser checks, then publishes GitHub Pages.
 
-Live game: https://sjefvanleeuwen.github.io/reinforcement-learning/
+Live experiment: https://sjefvanleeuwen.github.io/reinforcement-learning/
 
-## Inheritance, selection and limits
+## What the model represents
 
-Every organism has eight inherited traits: body size, leg count, leg length, walking speed, food senses, energy efficiency, colour and lifespan. When two nearby adults with enough energy mate, a child inherits randomly recombined values from both parents. Each trait has a configurable chance of a small random mutation, bounded to its playable range. The child's generation is one beyond the more recent parent.
+- Cells reproduce asexually through binary fission. A daughter copies the genome of one parent; there is no mating or sexual recombination.
+- Replication can introduce small mutations in mineral enzymes, motility, light harvesting, adhesion, heat tolerance, UV protection, DNA repair, and cell size.
+- Planetary conditions affect cell fitness, survival, and reproductive success. Heritable lineages that reproduce more often can become more common.
+- Cell adhesion can keep daughter cells together, allowing colonies to appear. Milestones are observed when traits emerge; no complex creature or multicellularity outcome is guaranteed.
 
-Individuals seek food within their inherited sensing distance and otherwise wander. Movement and body traits use energy; plants regrow; the slider changes warmth costs; optional fox pressure adds survival risk. Well-fed adults can reproduce. Those who survive leave more offspring, shifting the trait distribution through the family tree. This is actual individual selection across overlapping generations, not a scripted trend.
-
-The simulation uses a simplified 2D agent model, not a neural network, full animal biomechanics, or a biological forecast. Leg count, leg length, speed, senses, colour, size, efficiency and lifespan influence the rendered phenotype or life history. Save a selected creature’s genome JSON to keep its inherited traits. The population and world currently live in the open browser session; refreshing starts a new seed population. If the species goes extinct, invite eight new pioneers and adjust the habitat.
+This is a simplified population model, not a reconstruction of abiogenesis or Earth's actual history. The simulation starts with existing cells, does not model individual molecules or complete biochemistry, and compresses generations and geological time for playability. Its timeline and outcomes are illustrative rather than predictions. It does not force evolution toward a goal.
