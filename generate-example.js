@@ -1,0 +1,2 @@
+import {writeFileSync} from 'node:fs';import {Trainer,evaluate} from './src/physics.js';
+const options={target:1.4,assist:.8,seed:42,population:40,steps:720},t=new Trainer(options);for(let i=0;i<50;i++)t.runGeneration();const checkpoint={version:1,algorithm:'cem',generation:t.generation,policy:t.best,options,evaluation:evaluate(t.best,options)};writeFileSync(new URL('./trained-example.json',import.meta.url),JSON.stringify(checkpoint,null,2)+'\n');console.log(checkpoint.evaluation);
