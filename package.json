@@ -1,1 +1,1 @@
-{"name":"peep-robot-rescue","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test test/physics.test.js","start":"python -m http.server 8080"}}
+{"name":"little-worlds-evolution-garden","version":"2.0.0","private":true,"type":"module","scripts":{"test":"node --test test/evolution.test.js","start":"python -m http.server 8080"}}

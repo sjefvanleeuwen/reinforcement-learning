@@ -1,4 +1,4 @@
-name: Verify and deploy Peep
+name: Test and deploy Little Worlds
 on:
   push:
     branches: [main]
@@ -30,7 +30,7 @@ jobs:
       - name: Assemble static site
         run: |
           mkdir -p dist
-          cp index.html style.css trained-example.json dist/
+          cp index.html style.css dist/
           cp -r src dist/
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'

@@ -1,15 +1,15 @@
-# Peep! — Robot Rescue
+# Little Worlds — Evolution Garden
 
-A pastel cartoon game about Pip, a little robot with a big heart. Carry fluffy friends home across three progressively bumpier trails. Practice uses reward-based learning to adapt a controller to the selected trail. Real pickup adds passenger mass; reaching camp earns stars and unlocks another mission. Progress is saved locally, sound is optional and skills can be exported/imported.
+A small, cheerful evolution sandbox. Set the plant supply, climate, predator pressure and mutation rate. Start the garden and watch cartoon creatures search for food, grow tired, raise young and pass inherited traits to the next generation.
 
-Run `npm test` and `npm start`, then open http://localhost:8080. Node 24 and Python 3 are needed locally. No runtime npm dependencies. GitHub Actions runs physics and Playwright game tests, uploads screenshots and deploys Pages.
+Run `npm test` and `npm start`, then open http://localhost:8080. Requires Node 24 and Python 3. There are no runtime npm dependencies. GitHub Actions tests the ecology and browser, saves mobile/desktop screenshots and publishes GitHub Pages.
 
 Live game: https://sjefvanleeuwen.github.io/reinforcement-learning/
 
-## Mechanics and learning
+## Inheritance, selection and limits
 
-Four articulated legs and a horizontal body use ten physical nodes, gravity, torque-like motors, link constraints and foot contact. Smooth raised rubble changes the contact height. At x=.65, pickup increases body mass. Reach the mission goal within six simulated seconds without collapsing to rescue the passenger. Stars depend on arrival time (three under three seconds, two under five, otherwise one). Repeating a mission only improves its stored best star count.
+Every organism has eight inherited traits: body size, leg count, leg length, walking speed, food senses, energy efficiency, colour and lifespan. When two nearby adults with enough energy mate, a child inherits randomly recombined values from both parents. Each trait has a configurable chance of a small random mutation, bounded to its playable range. The child's generation is one beyond the more recent parent.
 
-Cross-entropy method tests populations of 12-parameter rhythmic feedback controllers. Rewards combine speed tracking, forward progress, body stability, pickup and rescue bonuses, effort costs and collapse penalties. A disclosed fixed vertical support gain of .8 helps beginner movement. The cartoon projects a planar simulation: lateral stability and real biomechanics are outside scope. No neural network, remote training or prerecorded gait is used. A measured 50-generation starter checkpoint can complete the first mission; harder courses need adaptation.
+Individuals seek food within their inherited sensing distance and otherwise wander. Movement and body traits use energy; plants regrow; the slider changes warmth costs; optional fox pressure adds survival risk. Well-fed adults can reproduce. Those who survive leave more offspring, shifting the trait distribution through the family tree. This is actual individual selection across overlapping generations, not a scripted trend.
 
-`node generate-example.js` reproduces the checkpoint. `npm test` checks deterministic physics, four legs, actual mass change at pickup, first-mission completion, harder-course differences, reward improvement and skill validation. Browser checks cover gameplay, pause, scoring, unlocks, practice, export/import, persistent progress and mobile layout. Imports evaluate a controller on the selected mission; they do not restore the optimizer distribution/RNG. Format v3 rejects obsolete spider/humanoid skills.
+The simulation uses a simplified 2D agent model, not a neural network, full animal biomechanics, or a biological forecast. Leg count, leg length, speed, senses, colour, size, efficiency and lifespan influence the rendered phenotype or life history. Save a selected creature’s genome JSON to keep its inherited traits. The population and world currently live in the open browser session; refreshing starts a new seed population. If the species goes extinct, invite eight new pioneers and adjust the habitat.
