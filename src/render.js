@@ -1,7 +1,7 @@
 const lerp=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
 export class Renderer{
  constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.muscles=true;this.side=false;this.camera=0;}
- size(){const r=this.canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);if(this.canvas.width!==Math.round(r.width*d)||this.canvas.height!==Math.round(r.height*d)){this.canvas.width=Math.round(r.width*d);this.canvas.height=Math.round(r.height*d);}this.ctx.setTransform(d,0,0,d,0,0);this.w=r.width;this.h=r.height;this.scale=Math.min(this.w*.33,this.h*.33);}
+ size(){const r=this.canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);if(this.canvas.width!==Math.round(r.width*d)||this.canvas.height!==Math.round(r.height*d)){this.canvas.width=Math.round(r.width*d);this.canvas.height=Math.round(r.height*d);}this.ctx.setTransform(d,0,0,d,0,0);this.w=r.width;this.h=r.height;this.scale=Math.min(this.w*(this.w<500?.43:.33),this.h*.33);}
  project([x,y,z]){x-=this.camera;const yaw=this.side?0:.55,rx=x*Math.cos(yaw)-z*Math.sin(yaw),depth=x*Math.sin(yaw)+z*Math.cos(yaw),factor=1/(1+depth*.07);return[this.w*.55+rx*this.scale*factor,this.h*.72-y*this.scale*factor+depth*this.scale*.22];}
  line(a,b,color,width){const c=this.ctx,A=this.project(a),B=this.project(b);c.beginPath();c.moveTo(...A);c.lineTo(...B);c.strokeStyle=color;c.lineWidth=width;c.lineCap='round';c.stroke();}
  ball(p,r,color){const c=this.ctx,[x,y]=this.project(p);c.beginPath();c.arc(x,y,r,0,Math.PI*2);const g=c.createRadialGradient(x-r*.3,y-r*.4,r*.1,x,y,r);g.addColorStop(0,'#fcf9e9');g.addColorStop(.6,color);g.addColorStop(1,'#7b8277');c.fillStyle=g;c.fill();}
