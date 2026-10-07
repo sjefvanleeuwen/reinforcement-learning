@@ -7,7 +7,7 @@ export class CellRenderer{
  // A simple nucleoid loop and ribosomes make the cell cross-section legible.
  ctx.strokeStyle=`hsla(${hue+38},75%,79%,.85)`;ctx.lineWidth=.85;ctx.beginPath();ctx.moveTo(-rad*.47,-rad*.12);ctx.bezierCurveTo(-rad*.12,-rad*.62,rad*.42,rad*.5,rad*.53,-rad*.07);ctx.bezierCurveTo(rad*.18,-rad*.52,-rad*.38,rad*.49,-rad*.47,-rad*.12);ctx.stroke();ctx.fillStyle='rgba(225,245,224,.62)';for(let i=0;i<5;i++){const a=i*2.4+c.id;ctx.beginPath();ctx.arc(Math.cos(a)*rad*.57,Math.sin(a)*rad*.37,.65,0,Math.PI*2);ctx.fill();}
  if(g[2]>.25){ctx.fillStyle=`hsla(46,89%,68%,${g[2]*.7})`;for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(-rad*.43+i*rad*.38,-rad*.52,1,0,Math.PI*2);ctx.fill();}}
- if(c.age<.8){const p=(t%900)/900;ctx.strokeStyle='rgba(151,248,222,.55)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,0,rad*1.5+p*2,rad*1.08+p*2,0,0,Math.PI*2);ctx.stroke();}
+ if(c.age<.8){const p=(t%900)/900;ctx.strokeStyle='rgba(151,248,222,.55)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,0,rad*1.5+p*2,rad*1.08+p*2,0,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='rgba(227,255,241,.82)';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(0,-rad*.66);ctx.lineTo(0,rad*.66);ctx.stroke();}
  if(selected){ctx.strokeStyle='#ffe6a4';ctx.lineWidth=1.4;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(0,0,rad*1.8,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}ctx.restore();}
  draw(selectedId=null){this.resize();const c=this.ctx,w=this.world,s=w.settings,t=w.generation;c.clearRect(0,0,720,600);const bg=c.createLinearGradient(0,0,0,600);bg.addColorStop(0,'#091a28');bg.addColorStop(.65,'#0b2532');bg.addColorStop(1,'#101d27');c.fillStyle=bg;c.fillRect(0,0,720,600);
  // Water-column particles
