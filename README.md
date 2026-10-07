@@ -2,7 +2,7 @@
 
 An educational evolutionary model that starts with a population of simple prokaryote-like cells near an ancient hydrothermal seep. Adjust mineral nutrients, sunlight, temperature, and ultraviolet radiation; then follow cell division, inherited variation, lineage branching, and differential survival over compressed deep time.
 
-Run `npm test` and `npm start`, then open http://localhost:8080. Deep-time controls include 1×, 100×, 10,000×, and 100,000×. The simulation processes actual model generations in bounded frame batches; achievable throughput depends on the device. The static site has no runtime npm dependencies. GitHub Actions runs ecology and browser checks, then publishes GitHub Pages.
+Run `npm test` and `npm start`, then open http://localhost:8080. Deep-time controls include 1×, 100×, 10,000×, and 100,000×. The timeline slider seeks anywhere in the first 10 million years and replays recorded environmental changes when you rewind. The simulation processes actual model generations in bounded frame batches; achievable throughput depends on the device. The static site has no runtime npm dependencies. GitHub Actions runs ecology and browser checks, then publishes GitHub Pages.
 
 Live experiment: https://sjefvanleeuwen.github.io/reinforcement-learning/
 
